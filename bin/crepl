@@ -6,6 +6,11 @@ require "tempfile"
 require "open3"
 PRINT_WARNINGS = false
 
+# Prevent the error trace when closing with ^C
+# From http://bogojoker.com/readline/
+stty_save = `stty -g`.chomp
+trap('INT') { system('stty', stty_save); exit }
+
 def process_code(crystal)
   lines = crystal.split(";")
   last_line = lines[-1]
