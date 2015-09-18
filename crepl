@@ -1,13 +1,23 @@
 #!env ruby
 puts "Crystal REPL"
-require "pry"
+# require "pry"
+require "readline"
+PRINT_WARNINGS = false
 def crystal_eval(crystal)
   File.write("crystal_code.cr", "puts #{crystal}")
   require "open3"
   Open3.popen3("crystal crystal_code.cr") do |stdin, stdout, stderr, wait_thr|
-    err = stderr.read
-    raise stderr.read unless err.empty?
-    return stdout.read
+    begin
+      err = stderr.read
+      if !err.empty?
+        if wait_thr.value.exitstatus == 0
+          puts err if PRINT_WARNINGS
+        else
+          raise err
+        end
+      end
+      return stdout.read
+    end
   end
 end
 
