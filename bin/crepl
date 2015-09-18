@@ -7,7 +7,7 @@ require "open3"
 PRINT_WARNINGS = false
 
 def crystal_eval(crystal, scratch)
-  scratch.write("p(#{crystal})")
+  scratch.write("p((#{crystal}))")
   scratch.flush
   Open3.popen3("crystal #{scratch.path}") do |stdin, stdout, stderr, wait_thr|
     begin
