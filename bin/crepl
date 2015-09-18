@@ -6,8 +6,15 @@ require "tempfile"
 require "open3"
 PRINT_WARNINGS = false
 
+def process_code(crystal)
+  lines = crystal.split(";")
+  last_line = lines[-1]
+  lines[-1] = "p((#{last_line}))"
+  lines.join(";")
+end
+
 def crystal_eval(crystal, scratch)
-  scratch.write("p((#{crystal}))")
+  scratch.write(process_code(crystal))
   scratch.flush
   Open3.popen3("crystal #{scratch.path}") do |stdin, stdout, stderr, wait_thr|
     begin
