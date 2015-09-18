@@ -3,20 +3,22 @@
 Forked version of "Simple Ruby repl" to make an even simpler crystal repl :D
 
 > Read the associated blog post for more information:
-> http://jpsilvashy.com/posts/build-a-simple-ruby-repl.html
+> http://jpsilvashy.com/posts/build-a-simple-ruby-repl.html  
+
 ## Installation
 Install it as:
     $ gem install crystal-repl
+
 ## Usage
 The whole gem is essentially a single binary, `crepl`
 Thus use it as `crepl`.
 The limitation of this repl is that every line you type is independant from the others. Thus if you want to run multiple lines, you should concatenate them with `;`
 
-WRONG
+WRONG   
 	puts 1
 	puts 2
 
-RIGHT
+RIGHT   
 	puts 1; puts 2
 
 ## Contributing
