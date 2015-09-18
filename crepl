@@ -2,11 +2,14 @@
 puts "Crystal REPL"
 # require "pry"
 require "readline"
+require "tempfile"
+require "open3"
 PRINT_WARNINGS = false
-def crystal_eval(crystal)
-  File.write("crystal_code.cr", "puts #{crystal}")
-  require "open3"
-  Open3.popen3("crystal crystal_code.cr") do |stdin, stdout, stderr, wait_thr|
+
+def crystal_eval(crystal, scratch)
+  scratch.write("puts #{crystal}")
+  scratch.flush
+  Open3.popen3("crystal #{scratch.path}") do |stdin, stdout, stderr, wait_thr|
     begin
       err = stderr.read
       if !err.empty?
@@ -21,11 +24,16 @@ def crystal_eval(crystal)
   end
 end
 
-def handle_input(input)
-  result = crystal_eval(input)
+def handle_input(input, scratch)
+  scratch.truncate(0)
+  result = crystal_eval(input, scratch)
   puts("=> #{result}")
 end
 
-loop do
-  handle_input(Readline.readline(">> ", true))
+Tempfile.open("crystal") do |scratch|
+  p scratch
+
+  loop do
+    handle_input(Readline.readline(">> ", true), scratch)
+  end
 end
