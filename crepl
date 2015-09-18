@@ -25,14 +25,15 @@ def crystal_eval(crystal, scratch)
 end
 
 def handle_input(input, scratch)
+  if input == "exit"
+    exit
+  end
   scratch.truncate(0)
   result = crystal_eval(input, scratch)
   puts("=> #{result}")
 end
 
 Tempfile.open("crystal") do |scratch|
-  p scratch
-
   loop do
     handle_input(Readline.readline(">> ", true), scratch)
   end
