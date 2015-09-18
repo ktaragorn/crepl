@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["karthikt.holmes+github@gmail.com"]
   spec.summary       = %q{A very simple REPL for crystal (crystal-lang.org)}
   spec.description   = %q{Crystal's design does not allow for a full traditional REPL. This one treats each line as indepentant crystal programs}
-  spec.homepage      = "https://github.com/ktaragorn/crepl"
+  spec.homepage      = "https://github.com/ktaragorn/crystal-repl"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
