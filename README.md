@@ -15,7 +15,7 @@ Thus use it as `crepl`.
 The limitation of this repl is that every line you type is independant from the others. Thus if you want to run multiple lines, you should concatenate them with `;`
 
 WRONG   
-	`puts 1`
+	`puts 1`   
 	`puts 2`
 
 RIGHT   
